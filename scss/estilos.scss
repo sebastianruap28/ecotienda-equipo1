@@ -1,0 +1,189 @@
+/* ============================================================= */
+/* Hoja de estilos de EcoEnergetic, escrita en Sass. */
+/* */
+/* Se compila a css/estilos.css con este comando (en la terminal): */
+/* npx sass scss/estilos.scss css/estilos.css --no-source-map */
+/* */
+/* El navegador NO lee este archivo: lee el .css que produce Sass. */
+/* Los cambios se hacen SIEMPRE aqui y se vuelve a compilar; si se */
+/* cambia el .css a mano, la proxima compilacion borra esos cambios. */
+/* */
+/* Es un estilo EXTERNO: las 4 paginas enlazan css/estilos.css con */
+/* <link>, DESPUES de Bootstrap. Si dos reglas chocan con la misma */
+/* fuerza, gana la que se carga de ultimas (esta). */
+/* ============================================================= */
+/* @use trae las variables y los mixins del parcial _variables.scss */
+/* (se escribe sin el guion bajo y sin .scss). */
+/* "as *" permite escribir $azul en vez de variables.$azul */
+@use "variables" as *;
+/* ------------------------------------------------------------- */
+/* VARIABLES CSS: la paleta de 6 colores */
+/* ------------------------------------------------------------- */
+/* :root es la raiz de la pagina: lo que se define aqui sirve en todo el sitio. */
+
+/* Una variable CSS empieza con dos guiones y se usa con var(...). */
+/* La interpolacion de Sass (numeral y llaves) escribe el valor de la variable: asi la paleta existe tambien */
+/* en el navegador, donde la usan los componentes de Bootstrap (al final). */
+:root {
+    --color-principal: #{$azul};
+    /* azul noche */
+    --color-acento: #{$naranja};
+    /* naranja sol */
+    --color-fondo: #{$crema};
+    /* crema */
+    --color-texto: #{$tinta};
+    /* casi negro */
+    --color-suave: #{$celeste};
+    /* celeste */
+    --color-ahorro: #{$verde};
+    /* verde */
+}
+
+/* ------------------------------------------------------------- */
+/* Selector de ETIQUETA: body = la pagina entera */
+/* ------------------------------------------------------------- */
+body {
+    font-family: "Rubik", Arial, sans-serif;
+    /* la fuente de Google Fonts; si no carga, Arial */
+    background-color: var(--color-fondo);
+    /* var(...) usa la variable CSS: fondo crema */
+    color: var(--color-texto);
+    /* el color de la letra de toda la pagina */
+}
+
+/* ------------------------------------------------------------- */
+/* Selectores AGRUPADOS: la misma regla para h1, h2 y h3 */
+/* (se separan con comas) */
+/* ------------------------------------------------------------- */
+h1,
+h2,
+h3 {
+    color: var(--color-principal);
+    /* titulos en azul noche */
+    font-weight: 700;
+    /* en negrilla (700 = bold) */
+}
+
+/* ------------------------------------------------------------- */
+/* Selector de CLASE (.encabezado) + MODELO DE CAJA + ANIDAMIENTO */
+/* ------------------------------------------------------------- */
+/* El punto quiere decir "clase": aplica a <header class="encabezado"> */
+.encabezado {
+    background-color: $azul;
+    /* fondo azul noche (variable de Sass) */
+    border-bottom: 6px solid $naranja;
+    /* BORDER: una franja naranja de 6 px, solo abajo */
+    margin-bottom: 24px;
+    /* MARGIN: 24 px de espacio de afuera, debajo */
+    @include caja(24px);
+
+    /* el mixin: PADDING de 24px, BORDER-RADIUS y BOX-SHADOW */
+    /* ANIDAMIENTO: esta regla esta DENTRO de .encabezado. */
+    /* Sass la compila como ".encabezado h1": un selector DESCENDIENTE */
+    /* (los h1 que estan dentro del encabezado) */
+    h1 {
+        color: white;
+        /* el titulo en blanco, para que se lea sobre el azul */
+        margin-bottom: 4px;
+        /* poco espacio entre el titulo y el parrafo */
+    }
+
+    /* Se compila como ".encabezado p": los parrafos dentro del encabezado */
+    p {
+        color: #E6EEF6;
+        /* texto en azul muy claro */
+    }
+
+    /* La media query tambien se anida, junto a la regla que cambia. */
+    /* Solo aplica si la pantalla mide 576 px o menos (celular) */
+    @media (max-width: $celular) {
+        padding: 16px;
+
+        /* menos relleno: la pantalla es angosta */
+        h1 {
+            font-size: 1.6rem;
+            /* el titulo mas pequeno (1,6 veces la letra normal) */
+        }
+    }
+}
+
+/* La marca de la tienda ("EcoEnergetic"), arriba del titulo */
+.marca {
+    display: inline-block;
+    /* ocupa solo el ancho de su texto, pero acepta margenes */
+    color: $naranja;
+    /* en naranja */
+    font-weight: 700;
+    /* en negrilla */
+    letter-spacing: 1px;
+    /* 1 px de espacio entre las letras */
+    text-transform: uppercase;
+    /* se muestra en MAYUSCULAS */
+    font-size: 0.85rem;
+    /* un poco mas pequena que la letra normal */
+    margin-bottom: 6px;
+    /* espacio debajo */
+}
+
+/* ------------------------------------------------------------- */
+/* FLEXBOX: el menu en una fila */
+/* ------------------------------------------------------------- */
+.menu {
+    display: flex;
+    /* los hijos (los enlaces) se ponen en fila */
+    flex-wrap: wrap;
+    /* si no caben, pasan a otra linea */
+    gap: 8px;
+
+    /* 8 px de espacio entre los enlaces */
+    /* RESPONSIVO: en celular, el menu en columna (un enlace debajo del otro) */
+    @media (max-width: $celular) {
+        flex-direction: column;
+    }
+
+    /* Selector HIJO (>): se compila como ".menu > a". */
+    /* Solo los enlaces que son hijos DIRECTOS del menu */
+    >a {
+        color: white;
+        /* letra blanca */
+        text-decoration: none;
+        /* sin subrayado */
+        border: 2px solid rgba(255, 255, 255, 0.45);
+        /* borde blanco al 45 % de opacidad */
+        text-align: center;
+        /* el texto centrado (se nota en celular) */
+        @include pildora;
+        /* el mixin: relleno 6px 16px y forma de pildora */
+
+        /* TRANSICION 1: el fondo y la letra cambian con suavidad, en 0,3 segundos */
+        transition: background-color 0.3s, color 0.3s;
+
+        /* PSEUDOCLASE :hover = el mouse esta encima. */
+        /* & es el selector de afuera: se compila como ".menu > a:hover" */
+        &:hover {
+            background-color: white;
+            /* el fondo se vuelve blanco... */
+            color: $azul;
+            /* ...y la letra azul */
+        }
+
+        /* PSEUDOCLASE :focus = se llego al enlace con la tecla Tab */
+        &:focus {
+            outline: 3px solid $naranja;
+            /* un contorno naranja, para ver donde esta el foco */
+            outline-offset: 2px;
+            /* separado 2 px del enlace */
+        }
+
+        /* ".menu > a.actual": el enlace de la pagina en la que se esta */
+        /* (en el HTML tiene class="actual") */
+        &.actual {
+            background-color: $naranja;
+            /* fondo naranja */
+            border-color: $naranja;
+            /* borde naranja */
+            color: $tinta;
+            /* letra oscura, para que se lea sobre el naranja */
+        }
+    }
+}

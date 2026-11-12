@@ -1,0 +1,64 @@
+/* ============================================================= */
+/* PARCIAL de Sass de EcoEnergetic: solo variables y mixins. */
+/* */
+/* Que es un parcial: un archivo de Sass que empieza con guion bajo */
+/* (_variables.scss). El guion bajo le dice a Sass que este archivo */
+/* NO se compila solo: se trae desde estilos.scss con @use. */
+/* */
+/* Para que sirve: tener los colores y las medidas en un solo lugar. */
+/* Si se cambia un color aqui, cambia en todo el sitio al compilar. */
+/* ============================================================= */
+/* --- VARIABLES DE SASS: la paleta de la tienda --- */
+/* Una variable de Sass empieza con $ y guarda un valor. */
+/* Solo existe mientras se compila: en el .css final queda el valor (#12355B). */
+$azul: #12355B;
+/* azul noche: encabezado, titulos y botones */
+$naranja: #F26A1B;
+/* naranja sol (por El Nino): acentos y pagina actual del menu */
+$crema: #FFF7EC;
+/* crema: el fondo de toda la pagina */
+$tinta: #1D2A35;
+/* casi negro: el color del texto */
+$celeste: #D8E6F0;
+/* celeste suave: bordes y etiquetas de categoria */
+$verde: #0B7A6B;
+/* verde: las cifras de ahorro (kWh y pesos) */
+/* --- VARIABLES DE SASS: medidas que se repiten --- */
+$radio: 14px;
+/* que tan redondeadas son las esquinas de las cajas */
+/* La sombra: 0 = no se mueve a los lados; 6px = baja 6 px; */
+/* 16px = que tan difuminada; rgba(...) = azul al 14 % de opacidad */
+$sombra: 0 6px 16px rgba(18, 53, 91, 0.14);
+/* --- VARIABLES DE SASS: anchos de pantalla para el diseno responsivo --- */
+$tablet: 992px;
+/* hasta 992 px de ancho se considera tablet */
+$celular: 576px;
+
+/* hasta 576 px de ancho se considera celular */
+/* --- MIXIN caja --- */
+/* Un mixin es un grupo de propiedades con nombre. Se usa con @include. */
+/* Este junta las tres cosas que tienen todas las cajas de la tienda: */
+/* relleno, esquinas redondeadas y sombra. */
+/* $relleno es un PARAMETRO: si no se le pasa un valor, vale 18px. */
+/* Lo usan: .encabezado, .dato, .tarjeta, #carrito y .formulario. */
+@mixin caja($relleno: 18px) {
+    padding: $relleno;
+    /* espacio de adentro: el que se le pase (o 18px) */
+    border-radius: $radio;
+    /* esquinas redondeadas (14px) */
+
+    box-shadow: $sombra;
+    /* la sombra azulada */
+}
+
+/* --- MIXIN pildora --- */
+/* La forma redondeada de los enlaces del menu, los filtros, */
+/* el buscador y las etiquetas de categoria. */
+/* Tiene dos parametros con valor por defecto: el relleno de arriba y abajo */
+/* ($vertical) y el de los lados ($horizontal). */
+@mixin pildora($vertical: 6px, $horizontal: 16px) {
+    padding: $vertical $horizontal;
+    /* relleno: primero arriba/abajo, luego los lados */
+    border-radius: 999px;
+    /* un radio enorme: los extremos quedan redondos */
+}
