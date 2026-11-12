@@ -234,3 +234,525 @@ h3 {
   color: #1D2A35;
   /* letra oscura, para que se lea sobre el naranja */
 }
+
+/* ------------------------------------------------------------- */
+/* Selector de ID: solo el elemento con id="intro" */
+/* ------------------------------------------------------------- */
+/* El numeral # quiere decir "id": un nombre unico en la pagina */
+#intro {
+  background-color: white;
+  /* fondo blanco */
+  padding: 18px 24px;
+  /* relleno: 18px arriba y abajo, 24px a los lados */
+  margin-bottom: 24px;
+  /* espacio debajo de la seccion */
+  border-left: 6px solid #F26A1B;
+  /* borde solo a la izquierda: 6 px, continuo, naranja */
+  border-radius: 14px;
+  /* esquinas redondeadas */
+}
+
+/* ------------------------------------------------------------- */
+/* GRID: las tres cifras de El Nino, en una rejilla */
+/* ------------------------------------------------------------- */
+.datos {
+  display: grid;
+  /* los hijos se acomodan en una rejilla */
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columnas del mismo ancho (1fr = una parte) */
+  gap: 16px;
+  /* espacio entre las cajas */
+  margin-bottom: 24px;
+  /* espacio debajo */
+}
+@media (max-width: 576px) {
+  .datos {
+    grid-template-columns: 1fr;
+    /* en celular, una sola columna */
+  }
+}
+
+/* Cada cifra */
+.dato {
+  background-color: #12355B;
+  /* fondo azul */
+  color: white;
+  /* letra blanca */
+  text-align: center;
+  /* texto centrado */
+  padding: 18px;
+  /* espacio de adentro: el que se le pase (o 18px) */
+  border-radius: 14px;
+  /* esquinas redondeadas (14px) */
+  box-shadow: 0 6px 16px rgba(18, 53, 91, 0.14);
+  /* la sombra azulada */
+  /* el mixin con su valor por defecto (18px de relleno) */
+  /* PSEUDOCLASE :nth-child(2) = el SEGUNDO hijo de su contenedor. */
+  /* Se compila como ".dato:nth-child(2)": la cifra del medio, en naranja */
+}
+.dato:nth-child(2) {
+  background-color: #F26A1B;
+  color: #1D2A35;
+}
+.dato {
+  /* ".dato strong": el numero grande de cada cifra */
+}
+.dato strong {
+  display: block;
+  /* en su propia linea, encima del texto */
+  font-size: 2rem;
+  /* el doble del tamano normal */
+}
+
+/* ------------------------------------------------------------- */
+/* GRID: las tarjetas en una rejilla de 3 columnas */
+/* ------------------------------------------------------------- */
+/* La usan la portada (ventajas), el catalogo (productos) y Nosotros (integrantes) */
+.tarjetas {
+  display: grid;
+  /* rejilla */
+  grid-template-columns: repeat(3, 1fr);
+  /* computador: 3 tarjetas por fila */
+  gap: 16px;
+  /* espacio entre tarjetas */
+  margin-bottom: 24px;
+  /* espacio debajo */
+  /* RESPONSIVO: tablet (992 px o menos): 2 tarjetas por fila */
+}
+@media (max-width: 992px) {
+  .tarjetas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.tarjetas {
+  /* RESPONSIVO: celular (576 px o menos): 1 tarjeta por fila */
+}
+@media (max-width: 576px) {
+  .tarjetas {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cada tarjeta */
+.tarjeta {
+  background-color: white;
+  /* fondo blanco */
+  border: 1px solid #D8E6F0;
+  /* borde fino celeste */
+  padding: 18px;
+  /* espacio de adentro: el que se le pase (o 18px) */
+  border-radius: 14px;
+  /* esquinas redondeadas (14px) */
+  box-shadow: 0 6px 16px rgba(18, 53, 91, 0.14);
+  /* la sombra azulada */
+  /* relleno, esquinas y sombra (el mixin) */
+  /* TRANSICION 2: el movimiento y la sombra cambian con suavidad */
+  transition: transform 0.3s, box-shadow 0.3s;
+  /* ".tarjeta:hover": el mouse esta encima de la tarjeta */
+}
+.tarjeta:hover {
+  transform: translateY(-6px);
+  /* sube 6 pixeles */
+  box-shadow: 0 12px 24px rgba(18, 53, 91, 0.22);
+  /* y la sombra crece */
+}
+.tarjeta {
+  /* PSEUDOCLASE :first-child = el PRIMER hijo de su contenedor: */
+  /* la primera tarjeta de cada rejilla lleva una franja naranja arriba */
+}
+.tarjeta:first-child {
+  border-top: 6px solid #F26A1B;
+}
+.tarjeta {
+  /* ".tarjeta h3": el titulo de la tarjeta */
+}
+.tarjeta h3 {
+  font-size: 1.15rem;
+  /* un poco mas grande que el texto */
+  margin-top: 8px;
+  /* espacio encima */
+}
+
+/* ------------------------------------------------------------- */
+/* Lo que muestra cada producto (las tarjetas las escribe JavaScript) */
+/* ------------------------------------------------------------- */
+/* La etiqueta de la categoria: "Iluminacion", "Cocina"... */
+.categoria {
+  display: inline-block;
+  /* ocupa solo el ancho de su texto */
+  background-color: #D8E6F0;
+  /* fondo celeste */
+  color: #12355B;
+  /* letra azul */
+  font-size: 0.8rem;
+  /* letra pequena */
+  font-weight: 500;
+  /* un poco gruesa */
+  padding: 2px 10px;
+  /* relleno: primero arriba/abajo, luego los lados */
+  border-radius: 999px;
+  /* un radio enorme: los extremos quedan redondos */
+  /* el mixin con OTROS valores: relleno 2px 10px */
+}
+
+/* El precio del producto */
+.precio {
+  color: #12355B;
+  /* en azul */
+  font-size: 1.3rem;
+  /* 1,3 veces el tamano normal */
+  font-weight: 700;
+  /* en negrilla */
+  margin-bottom: 4px;
+  /* poco espacio debajo */
+}
+
+/* El ahorro del producto (kWh y pesos) */
+.ahorro {
+  color: var(--color-ahorro);
+  /* en verde (variable CSS) */
+  font-weight: 700;
+  /* en negrilla */
+}
+
+/* El mensaje que sale cuando el filtro o el buscador no encuentran nada */
+.sin-resultados {
+  grid-column: 1/-1;
+  /* ocupa desde la primera columna hasta la ultima */
+  background-color: white;
+  /* fondo blanco */
+  border: 2px dashed #D8E6F0;
+  /* borde de linea punteada (dashed) */
+  border-radius: 14px;
+  /* esquinas redondeadas */
+  padding: 24px;
+  /* relleno */
+  text-align: center;
+  /* texto centrado */
+}
+
+/* ------------------------------------------------------------- */
+/* FLEXBOX: los filtros y el buscador en una fila */
+/* ------------------------------------------------------------- */
+.filtros {
+  display: flex;
+  /* los botones y el buscador en fila */
+  flex-wrap: wrap;
+  /* si no caben, pasan a otra linea */
+  align-items: center;
+  /* centrados en vertical */
+  gap: 8px;
+  /* espacio entre ellos */
+  margin-bottom: 16px;
+  /* espacio debajo */
+}
+
+/* Cada boton de filtro */
+.filtro {
+  border: 2px solid #12355B;
+  /* borde azul */
+  background-color: white;
+  /* fondo blanco */
+  color: #12355B;
+  /* letra azul */
+  padding: 6px 16px;
+  /* relleno: primero arriba/abajo, luego los lados */
+  border-radius: 999px;
+  /* un radio enorme: los extremos quedan redondos */
+  /* forma de pildora */
+  transition: background-color 0.3s, color 0.3s;
+  /* cambio suave */
+  /* Dos selectores con la misma regla: */
+  /* ".filtro:hover" (el mouse encima) y ".filtro.activo" (el boton elegido; */
+  /* JavaScript le pone la clase "activo" al boton que se oprime) */
+}
+.filtro:hover, .filtro.activo {
+  background-color: #12355B;
+  /* fondo azul... */
+  color: white;
+  /* ...y letra blanca */
+}
+.filtro {
+  /* ".filtro:focus": se llego con la tecla Tab */
+}
+.filtro:focus {
+  outline: 3px solid #F26A1B;
+  outline-offset: 2px;
+}
+
+/* La caja del buscador (la etiqueta "Buscar:" y el campo) */
+.buscador {
+  margin-left: auto;
+  /* margen automatico a la izquierda: lo empuja al final de la fila */
+  display: flex;
+  /* la etiqueta y el campo, en fila */
+  align-items: center;
+  /* centrados en vertical */
+  gap: 8px;
+  /* espacio entre los dos */
+  /* RESPONSIVO: en celular ocupa todo el ancho, con la etiqueta encima del campo */
+}
+@media (max-width: 576px) {
+  .buscador {
+    margin-left: 0;
+    /* ya no se empuja a la derecha */
+    width: 100%;
+    /* todo el ancho */
+    flex-direction: column;
+    /* en columna */
+    align-items: stretch;
+    /* el campo se estira a todo el ancho */
+  }
+}
+
+/* ------------------------------------------------------------- */
+/* Selector de ATRIBUTO: los input cuyo atributo type vale "search" */
+/* ------------------------------------------------------------- */
+/* Los corchetes [ ] eligen por atributo: aplica a <input type="search"> */
+input[type=search] {
+  border: 2px solid #D8E6F0;
+  /* borde celeste */
+  background-color: white;
+  /* fondo blanco */
+  padding: 6px 14px;
+  /* relleno: primero arriba/abajo, luego los lados */
+  border-radius: 999px;
+  /* un radio enorme: los extremos quedan redondos */
+  /* forma de pildora */
+  transition: border-color 0.3s;
+  /* el color del borde cambia con suavidad */
+  /* "input[type="search"]:focus": cuando se esta escribiendo en el */
+}
+input[type=search]:focus {
+  border-color: #F26A1B;
+  /* el borde se vuelve naranja */
+  outline: none;
+  /* sin el contorno del navegador (ya se nota por el borde) */
+}
+
+/* ------------------------------------------------------------- */
+/* GRID: los productos a la izquierda y el carrito a la derecha */
+/* ------------------------------------------------------------- */
+.catalogo {
+  display: grid;
+  /* rejilla */
+  grid-template-columns: 3fr 1fr;
+  /* 2 columnas: los productos, 3 veces mas anchos que el carrito */
+  gap: 16px;
+  /* espacio entre las dos */
+  align-items: start;
+  /* cada columna arriba, sin estirarse */
+  /* RESPONSIVO: en tablet y celular hay una sola columna: */
+  /* el carrito pasa DEBAJO del catalogo */
+}
+@media (max-width: 992px) {
+  .catalogo {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* El carrito (selector de ID) */
+#carrito {
+  background-color: white;
+  /* fondo blanco */
+  border: 2px solid #F26A1B;
+  /* borde naranja */
+  padding: 18px;
+  /* espacio de adentro: el que se le pase (o 18px) */
+  border-radius: 14px;
+  /* esquinas redondeadas (14px) */
+  box-shadow: 0 6px 16px rgba(18, 53, 91, 0.14);
+  /* la sombra azulada */
+  /* relleno, esquinas y sombra */
+  position: sticky;
+  /* se queda visible al bajar por la pagina */
+  top: 16px;
+  /* a 16 px del borde de arriba de la pantalla */
+  /* "#carrito h2": el titulo "Carrito" */
+}
+#carrito h2 {
+  font-size: 1.3rem;
+  /* mas pequeno que un h2 normal */
+}
+#carrito {
+  /* Cuando esta debajo del catalogo no hace falta que se quede pegado */
+}
+@media (max-width: 992px) {
+  #carrito {
+    position: static;
+    /* posicion normal */
+  }
+}
+
+/* La lista de productos del carrito */
+#lista-carrito {
+  list-style: none;
+  /* sin los puntos de la lista */
+  padding: 0;
+  /* sin el relleno que el navegador le pone a las listas */
+  /* "#lista-carrito li": cada producto de la lista */
+}
+#lista-carrito li {
+  padding: 6px 8px;
+  /* relleno */
+  border-radius: 8px;
+  /* esquinas redondeadas */
+  font-size: 0.9rem;
+  /* letra un poco mas pequena */
+  /* PSEUDOCLASE :nth-child(odd) = los hijos IMPARES (1.o, 3.o, 5.o...): */
+  /* una fila con fondo y una sin fondo, para leer mejor la lista */
+}
+#lista-carrito li:nth-child(odd) {
+  background-color: #FFF7EC;
+}
+
+/* El total del carrito */
+#total {
+  font-weight: 700;
+  /* en negrilla */
+  font-size: 1.1rem;
+  /* un poco mas grande */
+}
+
+/* ------------------------------------------------------------- */
+/* Pagina Nosotros */
+/* ------------------------------------------------------------- */
+/* El circulo con las iniciales del integrante */
+.iniciales {
+  display: flex;
+  /* Flexbox, para centrar las letras */
+  align-items: center;
+  /* centradas en vertical */
+  justify-content: center;
+  /* centradas en horizontal */
+  width: 72px;
+  /* ancho */
+  height: 72px;
+  /* alto (igual al ancho: un cuadrado) */
+  border-radius: 50%;
+  /* 50 % convierte el cuadrado en circulo */
+  background-color: #12355B;
+  /* fondo azul */
+  color: white;
+  /* letras blancas */
+  font-size: 1.5rem;
+  /* letras grandes */
+  font-weight: 700;
+  /* en negrilla */
+  border: 4px solid #F26A1B;
+  /* borde naranja */
+}
+
+/* El rol del integrante */
+.rol {
+  color: #F26A1B;
+  /* en naranja */
+  font-weight: 700;
+  /* en negrilla */
+}
+
+/* ------------------------------------------------------------- */
+/* Pagina Contacto: la caja del formulario */
+/* ------------------------------------------------------------- */
+.formulario {
+  background-color: white;
+  /* fondo blanco */
+  border: 1px solid #D8E6F0;
+  /* borde fino celeste */
+  max-width: 720px;
+  /* no pasa de 720 px de ancho */
+  margin-bottom: 24px;
+  /* espacio debajo */
+  padding: 24px;
+  /* espacio de adentro: el que se le pase (o 18px) */
+  border-radius: 14px;
+  /* esquinas redondeadas (14px) */
+  box-shadow: 0 6px 16px rgba(18, 53, 91, 0.14);
+  /* la sombra azulada */
+  /* el mixin con 24px de relleno */
+  /* ".formulario label": el nombre de cada campo */
+}
+.formulario label {
+  font-weight: 500;
+  /* un poco grueso */
+  margin-bottom: 4px;
+  /* espacio entre el nombre y el campo */
+}
+
+/* Selector de ATRIBUTO: los enlaces que abren otra pestana */
+/* (los que tienen target="_blank" en el HTML: XM e Ideam) */
+a[target=_blank] {
+  color: #12355B;
+  /* en azul */
+  font-weight: 700;
+  /* en negrilla */
+}
+
+/* ------------------------------------------------------------- */
+/* Pie de pagina */
+/* ------------------------------------------------------------- */
+.pie {
+  margin-top: 24px;
+  /* espacio encima del pie */
+  padding-top: 12px;
+  /* relleno arriba, entre la linea y el texto */
+  border-top: 1px solid #D8E6F0;
+  /* una linea fina arriba */
+  color: #52606D;
+  /* letra gris */
+  font-size: 0.9rem;
+  /* letra un poco mas pequena */
+}
+
+/* ============================================================= */
+/* BOOTSTRAP PERSONALIZADO, sin tocar el archivo de Bootstrap. */
+/* Se cambian tres componentes. Estas reglas ganan porque */
+/* estilos.css se carga DESPUES de Bootstrap. */
+/* ============================================================= */
+/* COMPONENTE 1: los botones primarios (class="btn btn-primary"). */
+/* Bootstrap lee los colores de sus botones de variables CSS que */
+/* empiezan con "bs-btn". Aqui se les dan los colores de la tienda. */
+.btn-primary {
+  --bs-btn-bg: var(--color-principal);
+  /* fondo del boton: azul */
+  --bs-btn-border-color: var(--color-principal);
+  /* borde: azul */
+  --bs-btn-hover-bg: var(--color-acento);
+  /* con el mouse encima: fondo naranja */
+  --bs-btn-hover-border-color: var(--color-acento);
+  /* y borde naranja */
+  --bs-btn-hover-color: #1D2A35;
+  /* y letra oscura */
+  --bs-btn-active-bg: var(--color-acento);
+  /* mientras se oprime: fondo naranja */
+  --bs-btn-active-border-color: var(--color-acento);
+  /* y borde naranja */
+  --bs-btn-active-color: #1D2A35;
+  /* y letra oscura */
+}
+
+/* COMPONENTE 2: el aviso (class="alert alert-warning"), */
+/* con el naranja de la tienda en vez del amarillo de Bootstrap */
+.alert-warning {
+  background-color: #FFF1E3;
+  /* fondo naranja muy claro */
+  color: #1D2A35;
+  /* letra oscura */
+  border-color: #F26A1B;
+  /* borde naranja */
+  border-left: 6px solid #F26A1B;
+  /* borde grueso solo a la izquierda */
+  border-radius: 14px;
+  /* esquinas redondeadas */
+}
+
+/* COMPONENTE 3: los campos del formulario (class="form-control" y */
+/* "form-select") cuando reciben el foco: Bootstrap los resalta en */
+/* azul claro; aqui, en naranja */
+.form-control:focus,
+.form-select:focus {
+  border-color: #F26A1B;
+  /* borde naranja */
+  box-shadow: 0 0 0 4px rgba(242, 106, 27, 0.25);
+  /* un resplandor naranja de 4 px */
+}
