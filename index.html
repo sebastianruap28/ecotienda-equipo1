@@ -1,0 +1,156 @@
+<!-- DOCTYPE: le dice al navegador que esta pagina es HTML5. Siempre va en la primera linea -->
+<!-- html: la etiqueta que encierra TODA la pagina. lang="es": el texto esta en espanol -->
+<html lang="es">
+<!-- head (cabeza): datos de la pagina que NO se ven en ella: titulo, estilos y fuentes -->
+<head>
+<!-- meta charset="UTF-8": permite tildes y enes (sin esto, "energía" saldria con simbolos raros) -->
+<meta charset="UTF-8">
+<!-- meta viewport: en el celular, la pagina usa el ancho REAL de la pantalla, sin zoom.
+Sin esto, el diseno responsivo (las media queries) no funciona en el celular -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- title: el texto de la pestana del navegador -->
+<title>EcoEnergetic: equipos que bajan la factura de energía</title>
+<!-- link: trae un archivo de afuera. rel="stylesheet": es una hoja de estilos.
+Esta es Bootstrap 5, una hoja de estilos ya hecha, desde internet (CDN) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<!-- Google Fonts: la fuente Rubik. preconnect abre la conexion antes, para que cargue mas rapido -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- crossorigin: el archivo de la fuente viene de otro sitio (gstatic.com); asi se permite -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- La hoja de la fuente, en tres grosores: normal (400), medio (500) y negrilla (700) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?
+family=Rubik:wght@400;500;700&amp;display=swap">
+<!-- La hoja de estilos PROPIA (estilo EXTERNO): css/estilos.css, compilada desde Sass.
+Va DESPUES de Bootstrap: si las dos dicen algo distinto, gana la que se carga de ultimas -->
+<link rel="stylesheet" href="css/estilos.css">
+<!-- Cierra el head: aqui termina lo que no se ve -->
+</head>
+<!-- body (cuerpo): TODO lo que se ve en la pagina. Dos clases de Bootstrap:
+container = centra el contenido y le pone un ancho maximo;
+py-3 = espacio arriba y abajo (p = padding, y = eje vertical, 3 = tamano) -->
+<body class="container py-3">
+<!-- header: el ENCABEZADO de la pagina (marca, titulo y menu).
+class="encabezado": clase PROPIA; su estilo esta en estilos.scss (.encabezado) -->
+<header class="encabezado">
+<!-- span: un trozo de texto. class="marca": el nombre de la tienda, en naranja y mayusculas -->
+<span class="marca">EcoEnergetic</span>
+<!-- h1: el titulo principal (solo debe haber uno por pagina) -->
+<h1>Menos kilovatios, menos factura</h1>
+<!-- p: un parrafo de texto -->
+<p>Equipos eficientes para pagar menos energía mientras dura El Niño 2026.</p>
+
+<!-- nav: el MENU de navegacion; une las 4 paginas del sitio.
+class="menu": Flexbox pone los enlaces en fila (en celular, en columna) -->
+<nav class="menu">
+<!-- a (ancla): un ENLACE. href: la pagina a la que lleva.
+class="actual": resalta en naranja la pagina en la que se esta.
+aria-current="page": se lo dice a los lectores de pantalla -->
+<a href="index.html" class="actual" aria-current="page">Inicio</a>
+<!-- Los otros tres enlaces: a las demas paginas -->
+<a href="catalogo.html">Catálogo</a>
+<a href="nosotros.html">Nosotros</a>
+<a href="contacto.html">Contacto</a>
+<!-- Cierra el menu -->
+</nav>
+<!-- Cierra el encabezado -->
+</header>
+<!-- main: el contenido PRINCIPAL de la pagina (lo que cambia de una pagina a otra) -->
+<main>
+<!-- section: una SECCION de la pagina, con su propio tema.
+id="intro": un nombre UNICO en la pagina; en CSS se le da estilo con #intro.
+Aqui va el efecto de El Nino 2026 en el precio de la energia, con datos reales -->
+<section id="intro">
+<!-- h2: un subtitulo (titulo de segundo nivel) -->
+<h2>¿Qué le hizo El Niño al precio de la energía?</h2>
+<!-- Primer parrafo: por que El Nino encarece la energia -->
+<p>
+Cerca del 70 % de la electricidad de Colombia sale de hidroeléctricas. Cuando El Niño
+trae menos lluvia, los embalses bajan, hay que prender plantas térmicas, que son más
+caras, y el precio de la energía en bolsa sube.
+</p>
+<!-- Segundo parrafo: los datos reales. strong: las cifras importantes, en negrilla -->
+<p>
+Según XM, el operador del mercado, el precio promedio de bolsa pasó de
+<strong>250,3 COP/kWh</strong> en agosto de 2025 a <strong>946,6 COP/kWh</strong> en
+agosto de 2026. El Ideam calcula en más del <strong>95 %</strong> la probabilidad de
+que El Niño siga y se fortalezca en el segundo semestre de 2026.
+</p>
+<!-- Cierra la seccion -->
+</section>
+<!-- Otra seccion: los mismos datos, en cifras grandes -->
+<section>
+<h2>El Niño 2026 en tres cifras</h2>
+<!-- div: una CAJA para agrupar. class="datos": una rejilla (Grid) de 3 columnas -->
+<div class="datos">
+<!-- Cada cifra es un parrafo con class="dato"; el numero va en strong.
+La segunda sale en naranja por la pseudoclase :nth-child(2) del CSS -->
+<p class="dato"><strong>946,6</strong> COP/kWh: precio promedio de bolsa en agosto de 2026</p>
+
+<p class="dato"><strong>+278 %</strong> frente a agosto de 2025</p>
+<p class="dato"><strong>95 %</strong> de probabilidad de que El Niño se fortalezca</p>
+<!-- Cierra la rejilla de cifras -->
+</div>
+</section>
+<!-- Otra seccion: por que conviene un equipo eficiente, en tarjetas -->
+<section>
+<h2>Por qué conviene un equipo eficiente</h2>
+<!-- class="tarjetas": el contenedor de la REJILLA (Grid): 3 columnas en computador,
+2 en tablet y 1 en celular -->
+<div class="tarjetas">
+<!-- article: un contenido que tiene sentido solo. Aqui, una TARJETA.
+class="tarjeta": su estilo (borde, sombra, sube con el mouse) esta en el CSS -->
+<article class="tarjeta">
+<!-- h3: el titulo de la tarjeta (tercer nivel) -->
+<h3>Gasta menos por lo mismo</h3>
+<!-- p: el texto de la tarjeta -->
+<p>Un bombillo LED de 12 W alumbra como uno de 100 W y gasta 88 % menos energía.</p>
+<!-- Cierra la tarjeta -->
+</article>
+<!-- Segunda tarjeta: la misma estructura (h3 + p) -->
+<article class="tarjeta">
+<h3>Se paga solo</h3>
+<p>Lo que deja de pagar cada mes en la factura devuelve el valor del equipo en pocos meses.
+
+</p>
+
+</article>
+<!-- Tercera tarjeta -->
+<article class="tarjeta">
+<h3>Ayuda a los embalses</h3>
+<p>Si baja la demanda, se usa menos agua de los embalses y se prenden menos plantas
+
+térmicas.</p>
+
+</article>
+<!-- Cierra la rejilla de tarjetas -->
+</div>
+</section>
+<!-- Un aviso de Bootstrap: alert = aviso; alert-warning = de advertencia.
+En estilos.scss se le cambia el amarillo de Bootstrap por el naranja de la tienda -->
+<div class="alert alert-warning">
+<!-- mb-2: clase de Bootstrap; un margen pequeno debajo (m = margin, b = bottom) -->
+<p class="mb-2">Cada producto del catálogo dice cuánto ahorra al mes y en cuántos meses se paga.</p>
+<!-- Un enlace con forma de boton: btn = boton; btn-primary = el boton principal,
+al que estilos.scss le pone los colores de la tienda -->
+<a class="btn btn-primary" href="catalogo.html">Ver el catálogo</a>
+<!-- Cierra el aviso -->
+</div>
+<!-- Cierra el contenido principal -->
+
+</main>
+<!-- footer: el PIE de pagina (fuentes y curso). class="pie": su estilo esta en el CSS -->
+<footer class="pie">
+<!-- Las fuentes de los datos. target="_blank": el enlace se abre en OTRA pestana
+(el CSS los pone en negrilla con el selector de atributo a[target="_blank"]).
+rel="noopener": por seguridad, la pagina nueva no puede controlar esta -->
+<p>Fuentes: <a href="https://www.xm.com.co" target="_blank" rel="noopener">XM</a>
+(precio de bolsa) e <a href="https://www.ideam.gov.co" target="_blank" rel="noopener">Ideam</a>
+(pronóstico de El Niño). Los productos y sus precios son de ejemplo.</p>
+<!-- El curso y la institucion -->
+<p>Ingeniería Web I · IU Digital de Antioquia · 2026-2</p>
+<!-- Cierra el pie de pagina -->
+</footer>
+<!-- Cierra el cuerpo: aqui termina lo que se ve -->
+</body>
+<!-- Cierra la pagina -->
+</html>

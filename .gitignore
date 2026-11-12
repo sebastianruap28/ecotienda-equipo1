@@ -1,0 +1,4 @@
+# node_modules: la carpeta donde npm instala Sass. No se sube a GitHub:
+# cada persona la crea en su computador con el comando npm install
+
+node_modules/
