@@ -288,6 +288,70 @@ function mostrarCarrito() {
             `Ahorra ${pesos(ahorroMes)} al mes: la compra se paga sola en ${meses} meses.`;
     }
 }
+
+// -------------------------------------------------------------
+// 5. EVENTOS: el programa reacciona a lo que hace el usuario
+// -------------------------------------------------------------
+// Un evento es algo que hace el usuario (un clic, escribir).
+// elemento.addEventListener("evento", funcion) = cuando ocurra ese evento
+// en ese elemento, ejecuta esa funcion
+// --- FILTROS: clic en un boton de categoria ---
+// querySelectorAll busca TODOS los elementos con la clase .filtro
+// (los 5 botones) y los guarda en botonesFiltro (una lista)
+
+const botonesFiltro = document.querySelectorAll(".filtro");
+// Recorre los 5 botones...
+for (const boton of botonesFiltro) {
+    // ...y a cada uno le pone a ESCUCHAR el evento "click"
+    boton.addEventListener("click", function () {
+        // Recorre otra vez los 5 botones...
+        for (const otro of botonesFiltro) {
+            // ...y les quita la clase "activo" a todos (classList = las clases del elemento)
+            otro.classList.remove("activo");
+        }
+        // Le pone la clase "activo" solo al boton que se oprimio:
+        // el CSS (.filtro.activo) lo resalta con fondo azul
+        boton.classList.add("activo");
+        // dataset.categoria lee el atributo data-categoria del boton.
+        // Ejemplo: <button data-categoria="solar"> -> "solar".
+        // Se guarda en la variable, para que el buscador tambien respete el filtro
+        categoriaActual = boton.dataset.categoria;
+        // Vuelve a dibujar los productos, ahora solo los de esa categoria
+        mostrarProductos();
+    });
+}
+// --- BUSCADOR: escribir en el campo de texto ---
+// El evento "input" ocurre cada vez que cambia lo escrito (cada letra que se
+// escribe o se borra), sin tener que oprimir Enter
+document.querySelector("#buscar").addEventListener("input", function (evento) {
+    // evento = la informacion de lo que paso.
+    // evento.target = el elemento donde ocurrio: el campo <input id="buscar">
+    // .value = el texto que tiene escrito el campo
+    textoBuscado = evento.target.value;
+    // Vuelve a dibujar los productos: solo los que contienen ese texto en el nombre
+    mostrarProductos();
+});
+// --- AGREGAR AL CARRITO: clic en un boton "Agregar al carrito" ---
+// Se escucha en el CONTENEDOR #productos y no en cada boton, porque los botones
+// los crea JavaScript y se borran y se vuelven a crear cada vez que se filtra
+document.querySelector("#productos").addEventListener("click", function (evento) {
+    // evento.target = el elemento exacto donde se hizo clic
+    // (puede ser un boton, un titulo, un precio...).
+    // Si tiene data-id, es un boton "Agregar al carrito"; si no, se hizo clic en otra parte
+    if (evento.target.dataset.id) {
+        // dataset.id es TEXTO ("1"). Number lo convierte en numero (1),
+        // para que producto.id === id funcione (1 === "1" daria false)
+        agregarAlCarrito(Number(evento.target.dataset.id));
+    }
+});
+
+// --- VACIAR: clic en el boton "Vaciar carrito" (<button id="vaciar">) ---
+document.querySelector("#vaciar").addEventListener("click", function () {
+    // El carrito vuelve a ser un arreglo vacio (por eso se declaro con let)
+    carrito = [];
+    // Y se vuelve a dibujar: sale "El carrito está vacío."
+    mostrarCarrito();
+});
 // -------------------------------------------------------------
 // 6. Al cargar la pagina
 // -------------------------------------------------------------
